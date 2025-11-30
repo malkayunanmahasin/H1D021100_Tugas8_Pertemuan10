@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:h1d021100_tugas8_pert10/model/produk.dart';
-import 'package:h1d021100_tugas8_pert10/ui/produk_detail.dart';
-import 'package:h1d021100_tugas8_pert10/ui/produk_form.dart';
+import '/bloc/logout_bloc.dart';
+import '/bloc/produk_bloc.dart';
+import '/model/produk.dart';
+import '/ui/login_page.dart';
+import '/ui/produk_detail.dart';
+import '/ui/produk_form.dart';
 
 class ProdukPage extends StatefulWidget {
   const ProdukPage({Key? key}) : super(key: key);
+
   @override
   _ProdukPageState createState() => _ProdukPageState();
 }
@@ -14,18 +18,18 @@ class _ProdukPageState extends State<ProdukPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('List Produk Malka'),
+        title: const Text('List Produk'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
             child: GestureDetector(
-              child: const Icon(Icons.add, size: 26.0),
-              onTap: () async {
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ProdukForm()),
                 );
               },
+              child: const Icon(Icons.add, size: 26.0),
             ),
           ),
         ],
@@ -36,58 +40,67 @@ class _ProdukPageState extends State<ProdukPage> {
             ListTile(
               title: const Text('Logout'),
               trailing: const Icon(Icons.logout),
-              onTap: () async {},
+              onTap: () async {
+                await LogoutBloc.logout();
+                if (mounted) {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                    (route) => false,
+                  );
+                }
+              },
             ),
           ],
         ),
       ),
-      body: ListView(
-        children: [
-          ItemProduk(
-            produk: Produk(
-              id: 1,
-              kodeProduk: 'A001',
-              namaProduk: 'Kamera',
-              hargaProduk: 5000000,
-            ),
-          ),
-          ItemProduk(
-            produk: Produk(
-              id: 2,
-              kodeProduk: 'A002',
-              namaProduk: 'Tripod',
-              hargaProduk: 2500000,
-            ),
-          ),
-          ItemProduk(
-            produk: Produk(
-              id: 3,
-              kodeProduk: 'A003',
-              namaProduk: 'Tas Kamera',
-              hargaProduk: 2000000,
-            ),
-          ),
-        ],
+      body: FutureBuilder<List<dynamic>>(
+        future: ProdukBloc.getProduks(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            debugPrint('Error: ${snapshot.error}');
+          }
+          return snapshot.hasData
+              ? ListProduk(list: snapshot.data)
+              : const Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }
 }
+class ListProduk extends StatelessWidget {
+  final List<dynamic>? list;
 
+  const ListProduk({Key? key, this.list}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: list?.length ?? 0,
+      itemBuilder: (context, i) {
+        return ItemProduk(produk: list![i]);
+      },
+    );
+  }
+}
 class ItemProduk extends StatelessWidget {
   final Produk produk;
+
   const ItemProduk({Key? key, required this.produk}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProdukDetail(produk: produk)),
+          MaterialPageRoute(
+            builder: (context) => ProdukDetail(produk: produk),
+          ),
         );
       },
       child: Card(
         child: ListTile(
-          title: Text(produk.namaProduk!),
+          title: Text(produk.namaProduk ?? 'Unknown'),
           subtitle: Text(produk.hargaProduk.toString()),
         ),
       ),
