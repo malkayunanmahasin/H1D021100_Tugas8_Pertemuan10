@@ -2,7 +2,12 @@
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0efc1211-e693-4fae-99e9-9496425ac23a" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1373f32d-2bb4-4886-8c56-dd56c778900b" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0ddc2981-0e0b-44d8-b930-a096d6870f12" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/38dfdfcc-734d-4a4a-8a21-0d3390544c2a" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/38dfdfcc-734d-4a4a-8a21-0d3390544c2a" /> 
+
+# Running 
+https://github.com/user-attachments/assets/a200581f-4a55-41c4-9540-14e2ac34ad81
+
+
 
 # Penjelasan Pertemuan 10 Tugas 8 (Masih Manual pindah halamannya)
 1. Halaman main.dart
