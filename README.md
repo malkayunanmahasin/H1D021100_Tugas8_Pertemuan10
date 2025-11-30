@@ -5,7 +5,12 @@
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/38dfdfcc-734d-4a4a-8a21-0d3390544c2a" /> 
 
 # Running 
-https://github.com/user-attachments/assets/a200581f-4a55-41c4-9540-14e2ac34ad81
+https://github.com/user-attachments/assets/a200581f-4a55-41c4-9540-14e2ac34ad81 
+
+# backend 
+https://github.com/malkayunanmahasin/backend-pert10-11.git 
+
+Mekanisme utama yang menghubungkan kedua program ini adalah melalui pertukaran data menggunakan protokol HTTP di internet. Program klien (H1D021100_Tugas8_Pertemuan10) akan mengirimkan permintaan (request) ke program server (backend-pert10-11) setiap kali pengguna melakukan tindakan yang memerlukan akses data, seperti mengambil daftar item, menyimpan data baru, atau memperbarui informasi. Sebagai contoh, ketika pengguna menekan tombol "Simpan" di klien, klien akan mengirim permintaan POST ke endpoint API tertentu di server. Program server kemudian akan memproses permintaan ini—misalnya, memvalidasi data dan menyimpannya ke database—dan mengirimkan respons (response) kembali ke klien, biasanya dalam format JSON atau XML, yang berisi status keberhasilan atau data yang diminta.
 
 
 
